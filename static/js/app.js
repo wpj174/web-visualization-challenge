@@ -4,7 +4,7 @@
 function demoInfo(sample)
 {
     // pass in sample data
-    console.log(sample);
+    //console.log(sample);
 
     // use d3.json to get the data
     d3.json("samples.json").then((data) => {
@@ -44,7 +44,7 @@ function buildBarChart(sample)
     d3.json("samples.json").then((data) => {
         // get the sample data
         let sampleData = data.samples;
-        console.log(sampleData);
+        //console.log(sampleData);
 
         // filter based on the sample number passed in - should get a single-item array
         let result = sampleData.filter(sampleResult => sampleResult.id == sample);
@@ -60,11 +60,8 @@ function buildBarChart(sample)
         let otu_labels = resultData.otu_labels;
         let sample_values = resultData.sample_values;
 
-        //console.log(otu_ids);
-        //console.log(otu_labels);
-        //console.log(sample_values);
-
         // buld the bar chart
+
         // get the y ticks
         let yticks = otu_ids.slice(0, 10).map(id => `OTU ${id}`);
         let xValues = sample_values.slice(0, 10);
@@ -94,9 +91,6 @@ function buildBubbleChart(sample)
 {
     //console.log(sample);
 
-    //let data = d3.json("samples.json");
-    //console.log(data);
-
     d3.json("samples.json").then((data) => {
         // get the sample data
         let sampleData = data.samples;
@@ -121,12 +115,6 @@ function buildBubbleChart(sample)
         //console.log(sample_values);
 
         // buld the bubble chart
-        // get the y ticks
-        //let yticks = otu_ids.slice(0, 10).map(id => `OTU ${id}`);
-        //let xValues = sample_values.slice(0, 10);
-        //let textLabels = otu_labels.slice(0, 10);
-        //console.log(textLabels);
-
         let bubbleChart = {
             y: sample_values,
             x: otu_ids,
