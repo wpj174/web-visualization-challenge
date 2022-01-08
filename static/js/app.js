@@ -19,7 +19,11 @@ function demoInfo(sample)
 
         // get item 0 from the array
         let resultData = result[0];
-        //console.log(resultData);
+        console.log(resultData);
+        console.log(resultData.wfreq);
+
+        // send wash frequency to build gauge
+        buildGauge(resultData.wfreq);
 
         // clear the metadata if any for next round of populating
         d3.select("#sample-metadata").html("");
@@ -94,7 +98,7 @@ function buildBubbleChart(sample)
     d3.json("samples.json").then((data) => {
         // get the sample data
         let sampleData = data.samples;
-        console.log(sampleData);
+        //console.log(sampleData);
 
         // filter based on the sample number passed in - should get a single-item array
         let result = sampleData.filter(sampleResult => sampleResult.id == sample);
@@ -143,7 +147,7 @@ function initialize()
 {
     // load the data from the .json file
     let data = d3.json("samples.json");
-    console.log(data);
+    //console.log(data);
 
     // access teh dropdown selectro from the index.html file
     var select = d3.select("#selDataset");
@@ -172,6 +176,9 @@ function initialize()
         // call function to build the bubble chart
         buildBubbleChart(sample1);
 
+        // call function to build gauge
+        buildGauge(sample1);
+
     });
 }
 
@@ -186,6 +193,9 @@ function optionChanged(item)
 
     // call function to build the bubble chart
     buildBubbleChart(item);
+
+    // call functin to build gauge
+    buildGauge(item);
 
 
 }
