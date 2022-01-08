@@ -5,6 +5,32 @@ function demoInfo(sample)
 {
     // pass in sample data
     console.log(sample);
+
+    // use d3.json to get the data
+    d3.json("samples.json").then((data) => {
+        // get the metadata
+        let metaData = data.metadata;
+        //console.log(metaData);
+
+        // filter based on the sample number passed in - should get a single-item array
+        let result = metaData.filter(sampleResult => sampleResult.id == sample);
+
+        //console.log(result);
+
+        // get item 0 from the array
+        let resultData = result[0];
+        console.log(resultData);
+
+        // clear the metadata if any for next round of populating
+        d3.select("#sample-metadata").html("");
+
+        // use Object.entries to get the value key pairs
+        Object.entries(resultData).forEach(([key, value]) => {
+            // add to the selected sample metadata panel
+            d3.select("#sample-metadata")
+                .append("h5").text(`${key}: ${value}`);
+        });
+    });
 }
 
 // function to build the graphs
@@ -43,7 +69,9 @@ function initialize()
 // function to update the dashboard
 function optionChanged(item)
 {
-    console.log(item);
+    // call the update to the metadata
+    demoInfo(item);
+
 }
 
 // call the initialization funciton
